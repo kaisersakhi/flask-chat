@@ -1,12 +1,18 @@
 from flask import Flask
+from flask_socketio import SocketIO, send
+from flask_cors import CORS
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'startfund999'
+CORS(app)
+socketio = SocketIO(app, cors_allowed_origins="*")
 
 
-@app.route('/')
-def home():
-    return 'Hello World!'
+@socketio.on('message')  # here the 'message' will specify
+def handle_message(msg):  # will get called on each receive
+    print(msg)
+    send(msg, broadcast=True)  # get the message and broadcast it back to every client connected
 
 
 if __name__ == '__main__':
-    app.run(debug=True, )
+    socketio.run(app, debug=True)
