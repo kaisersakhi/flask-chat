@@ -8,6 +8,11 @@ CORS(app)
 socketio = SocketIO(app, cors_allowed_origins="*")
 
 
+@app.route('/')
+def home():
+    return "<h1>Start Fund - Chat App</h1>"
+
+
 @socketio.on('message')  # here the 'message' will specify
 def handle_message(msg):  # will get called on each receive
     print(msg)
