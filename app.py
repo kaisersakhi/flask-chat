@@ -20,4 +20,4 @@ def handle_message(msg):  # will get called on each receive
 
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    socketio.run(app)
